@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  nextjs:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - nestjs
+
+  nestjs:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    env_file:
+      - ./back/.env
+
+  nginx-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - nextjs
