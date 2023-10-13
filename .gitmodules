@@ -1,0 +1,6 @@
+[submodule "client"]
+	path = client
+	url = ./client
+[submodule "back"]
+	path = back
+	url = ./back
