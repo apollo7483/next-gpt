@@ -1,6 +1,6 @@
 [submodule "client"]
 	path = client
-	url = ./client
+	url = https://github.com/apollo7483/next-demo.git
 [submodule "back"]
 	path = back
-	url = ./back
+	url = https://github.com/apollo7483/nest-demo.git
