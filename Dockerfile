@@ -1,9 +1,25 @@
+# ---- Copy from Next.js Build ----
+FROM node:18-alpine AS nextjs-builder
+
+WORKDIR /app
+
+COPY ./client/package*.json ./
+RUN npm ci
+
+COPY ./client .
+RUN npm run build
+
+# ---- Nginx Stage ----
 FROM nginx:alpine
 
-COPY client/out/ /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf /usr/share/nginx/html/*
 
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+# Copy static assets from Next.js build stage
+COPY --from=nextjs-builder /app/out /usr/share/nginx/html
 
+# Expose port 80
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
+
