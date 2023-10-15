@@ -5,8 +5,6 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    depends_on:
-      - nestjs
 
   nestjs:
     build:
@@ -21,5 +19,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:80"
-    depends_on:
-      - nextjs
