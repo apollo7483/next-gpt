@@ -1,5 +1,5 @@
 # ---- Copy from Next.js Build ----
-FROM node:18-alpine AS nextjs-builder
+FROM node:alpine AS nextjs-builder
 
 WORKDIR /app
 
@@ -17,6 +17,8 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copy static assets from Next.js build stage
 COPY --from=nextjs-builder /app/out /usr/share/nginx/html
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
